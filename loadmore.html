@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>もっと見る実装</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+</head>
+<style>
+
+article img{
+    max-width: 300px;
+}
+
+</style>
+<body>
+    <div class="container" id="app">
+        <h1>もっと見る</h1>
+        <main class="main">
+          <article v-for="malaysia in malaysias" class="card">
+           <div class="img_list">
+            <img v-bind:src="malaysia.thumbnail" alt="記事サムネイル">
+           </div>
+          </article>
+        </main>
+        <button class="button" v-on:click="load" v-if="hasNext">もっと見る</button>
+      </div>
+<script>
+const imglist = {
+    "count":10,
+    "malaysias":[
+    { "thumbnail": "./img_loadmore/img1.jpg" },
+    { "thumbnail": "./img_loadmore/img2.jpg" },
+    { "thumbnail": "./img_loadmore/img3.jpg" },
+    { "thumbnail": "./img_loadmore/img4.jpg" },
+    { "thumbnail": "./img_loadmore/img5.jpg" },
+    { "thumbnail": "./img_loadmore/img6.jpg" },
+    { "thumbnail": "./img_loadmore/img7.jpg" },
+    { "thumbnail": "./img_loadmore/img8.jpg" },
+    { "thumbnail": "./img_loadmore/img9.jpg" },
+    { "thumbnail": "./img_loadmore/img10.jpg" }
+    ]
+}
+
+const loadNum = 2;
+    var vm = new Vue({
+      el: '#app',
+      data: {
+        malaysias: [],
+        hasNext: true
+      },
+      methods: {
+        load: function () {
+          var self = this;
+          self.malaysias = self.malaysias.concat(imglist.malaysias.slice(self.malaysias.length, self.malaysias.length + loadNum));
+          if (self.malaysias.length >= imglist.count) {
+            self.hasNext = false;
+          }
+        }
+      },
+      mounted: function () {
+        this.load();
+      }
+    });
+</script>    
+
+
+</body>
+</html>
