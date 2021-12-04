@@ -8,6 +8,12 @@
   <link rel="stylesheet" href="https://cdn.rawgit.com/milligram/milligram/master/dist/milligram.min.css">
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.17/dist/vue.js"></script>
 </head>
+<style>
+.clickbutton button{
+    display: block;
+    margin:0 auto;
+}
+</style>
 <body>
 <div class="container" id="app">
   <h1>おみくじ</h1>
@@ -48,6 +54,15 @@
       </section>
     </main>
   </div>
+<!-- <div id="app3">
+    {{ message }}
+</div> -->
+
+<div class="clickbutton">
+    <button class="button" id="button">クリック</button>
+    <div id="text"></div>
+</div>
+
 <script>
   // 結果のデータ
   let omikuji = ['大吉', '吉','小吉','凶', '大凶'];
@@ -103,6 +118,21 @@
         }
       },
     },
+  });
+
+//   new Vue({
+//       el: '#app3',
+//       data:{
+//           message: 'Hello world!'
+//       }
+//   })
+
+  let button = document.getElementById('button');
+  let text = document.getElementById('text');
+  var count = 0;
+
+  button.addEventListener('click', function(){
+    text.textContent = 'ボタンを' + ++count + '回クリックしました';
   });
 
 
